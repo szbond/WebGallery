@@ -36,7 +36,7 @@ flask端，基本路由，压缩，展示标签
 
 react端，基本数据的传输，资源的申请，标签的更改与提交
 
-![](screenshots/Snipaste_2020-04-19_01-41-49.png)
+![screenshots](https://github.com/szbond/WebGallery/tree/master/screenshots/Snipaste_2020-04-19_01-41-49.png)
 
 之后：
 
