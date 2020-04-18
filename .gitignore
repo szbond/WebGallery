@@ -1,0 +1,8 @@
+.vscode/
+__pycache__/
+data/*
+static/images/thumb/*
+static/images/upload/*
+static/js/jquery*
+venv/
+react/node_moduels

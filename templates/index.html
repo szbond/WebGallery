@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gallery</title>
+</head>
+<body>
+    <h1>gallery</h1>
+    <div id = "view">view</div>
+    <div id = gallery>
+        {%for pic in pics%}
+        <div class="pic">
+        <img src={{"/static/images/thumb/" + pic}}>
+        
+        <a href={{ "/images/" + pic }} target="_blank"><p>{{ pic }}</p></a>
+        <form action="/tags/submit" method="GET">
+            <input type="text" name="tag" placeholder="tags block with blankspace" >
+            <input type="button" class = "submit" value="submit">
+        </form>
+        </div>
+        {%endfor%}
+
+    </div>
+</body>
+<script src="/static//js/jquery.min.js"></script>
+<script src="/static/js/main.js"></script>
+</html>
