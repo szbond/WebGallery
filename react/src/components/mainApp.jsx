@@ -13,6 +13,9 @@ export default class App extends React.Component{
     render(){
         return <div>
             <h1>gallery</h1>
+            <div className = "org">
+                <img src="" alt="org" id = "org"/>
+            </div>
             <Pics></Pics>
             {/* <Pagination total = {5}/> */}
             

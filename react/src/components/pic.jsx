@@ -19,11 +19,15 @@ export default class Pic extends React.Component{
             <br/>
             <p>{this.state.name}</p>
             
-   
+            <input type="text" value = {this.state.showTags.join(" ") } readOnly/>
+            <br/>
             <input type="text" placeholder="tags" id = {this.state.name} onChange={()=>{this.saveTags()}}/>
+            <br/>
             <input type="button" value = "submit" onClick={()=>{this.submTags()}}/>
             {/* <Tag tags = {this.props.tags}></Tag>   */}
-            <p>{this.state.showTags.join(" ")}</p>
+            <input type="button" onClick = {()=>{this.showOrg()}}/>
+            
+    
         </div>
     }
     saveTags(){
@@ -61,6 +65,10 @@ export default class Pic extends React.Component{
             showTags: newTags
         })
 
+    }
+    showOrg(){
+        let img = document.getElementById("org")
+        img.setAttribute("src", "http://localhost:5000/get/realPic/" + this.state.name)
     }
     
 }

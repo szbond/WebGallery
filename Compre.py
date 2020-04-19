@@ -77,13 +77,15 @@ class Compre:
     def readPage(self, limit=10, cleanPage = False):
         if cleanPage:
             self.page = 0
-        offset = self.page
+        
+        pics = self.database.getPic(limit, self.page)
         self.page += limit
-        pics = self.database.getPic(limit, offset)
         picsDit = {}
+        picsOrg = {}
         for pic in pics:
-            picsDit[pic] = self.database.findTags(pic)
-        return picsDit
+            picsOrg[pic[0]] = pic[1]
+            picsDit[pic[0]] = self.database.findTags(pic[0])
+        return (picsDit, picsOrg)
    
     def cleanThumb(self):
 

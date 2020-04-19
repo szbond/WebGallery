@@ -23,7 +23,6 @@ export default class Pics extends React.Component{
             })}
             <div><input type="button" value = "next page" onClick = {()=>{
                 let newPage = this.state.pageNo + 1
-                console.log(newPage)
                 this.getPage(newPage)
                 this.setState({
                     pageNo: newPage
@@ -40,7 +39,7 @@ export default class Pics extends React.Component{
             .then((res)=>res.json(), err=>alert("get pics fail err: " + err.message))
             // .then(res => res.json() )
             .then(body => {
-                
+                console.log(body)
                 this.setState({
                     data: body
                 })

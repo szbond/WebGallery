@@ -5,4 +5,4 @@ static/images/thumb/*
 static/images/upload/*
 static/js/jquery*
 venv/
-react/node_moduels
+react/node_modules/

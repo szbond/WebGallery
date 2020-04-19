@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,  make_response
+from flask import Flask, render_template, request,  make_response, redirect, url_for, send_from_directory
 import Compre
 import os
 import json
@@ -6,18 +6,13 @@ import page
 app = Flask(__name__)
 comp = Compre.Compre()
 print(comp.thumbPath)
-# picLs = comp.readPage(10)
-# comp.cleanThumb()
-
 pics = os.listdir("./static/images/thumb")
 pages = page.Pages(comp)
+pages.cleanPages()
 pages.loadPages(10,5)
-
-
 @app.route("/")
 def index():
     return render_template("index.html", pics = pics)
-
 @app.route("/images/<name>")
 def find(name):
     org = comp.database.findOrg(name)
@@ -39,15 +34,37 @@ def getTags():
 @app.route("/get/page", methods = ["GET"])
 def getPics():
     pageNo = int(request.args.to_dict()["pageNo"])
-    if pageNo < len(pages.pages) and pageNo > 0:
-        res = make_response(pages.pages[int(pageNo)-1])
-        print(pages.pages[int(pageNo)-1])
+    if pageNo in pages.pages.keys():
+        res = make_response(pages.pages[pageNo])
     else:
-        res = make_response(pages.pages[0])
+        pages.loadMore(pageNo)
+        
+        if pageNo in pages.pages.keys():
+ 
+            res = make_response(pages.pages[pageNo])
+        else:
+            # 重定向主页
+            res = make_response(pages.pages[1])
     res.headers["Access-Control-Allow-Origin"] = "*"
     
     return  res
     # data:JSON.parse()
+
+@app.route("/get/realPic/<picName>", methods = ["GET"])
+def sendRealPic(picName):
+    if picName in pages.pagePicOrg.keys():
+        imgFile = open(pages.pagePicOrg[picName], "rb")
+        img = imgFile.read()
+        imgFile.close()
+        res = make_response(img)
+        
+        res.headers["Content-Type"] = "image/jpeg"
+        # res.headers["Access-Control-Allow-Origin"] = "*"
+        # return send_from_directory(pages.pagePicOrg[picName], picName)
+        return res
+    else:
+        return redirect("/")
+
 
 
 if __name__ == "__main__":

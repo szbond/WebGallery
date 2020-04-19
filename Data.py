@@ -204,8 +204,9 @@ class PicData:
         tagId = self.execSearch("SELECT TAGID from TAG where TAGNAME=?",(tagName,))
         return tagId
     def getPic(self, limit, offset):
-        sql = "SELECT PICNAME  from PIC ORDER BY PICID LIMIT ? offset ?"
-        return PicData.optim(self.execSearch(sql,(limit,offset)))
+        sql = "SELECT PICNAME, PICORG  from PIC ORDER BY PICID LIMIT ? offset ?"
+        # return PicData.optim(self.execSearch(sql,(limit,offset)))
+        return self.execSearch(sql,(limit,offset))
     '''
     def getTags(self, picId):
         sql = "SELECT TAGNAME  from TAG JOIN REL ON REL.TAGID=TAG.TAGID WHERE PICID = ?"
