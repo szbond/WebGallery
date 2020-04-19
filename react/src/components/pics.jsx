@@ -15,9 +15,9 @@ export default class Pics extends React.Component{
         this.getPage()
     }
     render(){
-        console.log(typeof(this.state.data))
+        
         let pics = Object.getOwnPropertyNames(this.state.data)
-        return <div>
+        return <div className = "Pics-cont">
             {pics.map(pic=>{
                 return <Pic key = {pic} name = {pic} tags = {this.state.data[pic]}></Pic>
             })}
@@ -39,7 +39,7 @@ export default class Pics extends React.Component{
             .then((res)=>res.json(), err=>alert("get pics fail err: " + err.message))
             // .then(res => res.json() )
             .then(body => {
-                console.log(body)
+                
                 this.setState({
                     data: body
                 })

@@ -13,9 +13,9 @@ export default class Pic extends React.Component{
     }
     static defalutProps = {}
     render(){
-        // console.log("ren")
-        return <div>
-            <img src={"http://localhost:5000/static/images/thumb/" + this.props.name} alt="pic"/>
+        // console.log(this.props.tags)
+        return <div className = "pic-cont">
+            <img className = "pic" src={"http://localhost:5000/static/images/thumb/" + this.props.name} alt="pic" onClick = {()=>{this.showOrg()}}/>
             <br/>
             <p>{this.state.name}</p>
             
@@ -25,7 +25,7 @@ export default class Pic extends React.Component{
             <br/>
             <input type="button" value = "submit" onClick={()=>{this.submTags()}}/>
             {/* <Tag tags = {this.props.tags}></Tag>   */}
-            <input type="button" onClick = {()=>{this.showOrg()}}/>
+            {/* <input type="button" value="show" onClick = {()=>{this.showOrg()}}/> */}
             
     
         </div>

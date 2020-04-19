@@ -86,7 +86,20 @@ class Compre:
             picsOrg[pic[0]] = pic[1]
             picsDit[pic[0]] = self.database.findTags(pic[0])
         return (picsDit, picsOrg)
-   
+    def subTags(self, pic, tags):
+        if (not pic) or (not tags):
+            return None
+        relList = []
+        picId = self.database.getPicId(pic, True)[0][0]
+        
+        for tag in tags:
+            
+            tagId = self.database.insertTag(tag)
+       
+            relList.append((picId, tagId))
+        for rel in relList:
+            self.database.insertRel(rel[0], rel[1])
+            # self.database.insertRel(rel[0], rel[1])
     def cleanThumb(self):
 
         if not os.path.exists(self.thumbPath):

@@ -196,8 +196,12 @@ class PicData:
         res = self.execSearch(sql,(tagId,picId))
         return res
     
-    def getPicId(self, picOrg):
-        picId = self.execSearch("SELECT PICID from PIC where PICORG=?",(picOrg,))
+    def getPicId(self, picOrg, byName=False):
+        if byName:
+            sql = "SELECT PICID from PIC where PICNAME=?"
+        else:
+            sql = "SELECT PICID from PIC where PICORG=?"
+        picId = self.execSearch(sql,(picOrg,))
         return picId
     
     def getTagId(self, tagName):

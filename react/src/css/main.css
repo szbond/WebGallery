@@ -1,0 +1,77 @@
+#app
+{
+    width: 100%;
+    height: 100%;
+
+
+}
+.cont
+{
+
+    width: 18%;
+    height: 100%;
+    overflow: scroll;
+    
+}
+
+
+.pic-cont
+{
+    display: flex;
+    flex-direction: column;
+    
+    padding: 3px;
+    margin: 10px;
+    
+}
+.pic-cont p
+{
+    text-align: center;
+    font-weight: 700;
+    padding: 2px;
+}
+.pic
+{
+   border-radius: 10px;
+   width: 100%;
+}
+.application
+{
+    display: block;
+    height: 100%;
+
+
+    
+}
+.view
+{
+    /* display: flex;
+    flex-direction: row; */
+    /* justify-content:center ; */
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 5%;
+}
+.view-img
+{
+
+    float: right;
+    margin: 50px;
+    height: 2000%;
+    width: 60%;
+    
+}
+.img-cont
+{
+    height: 100%;
+    width: 100%;
+    padding-bottom: 10%;
+    
+
+}
+#org
+{  
+    max-height: 100%;
+    max-width: 100%;
+}

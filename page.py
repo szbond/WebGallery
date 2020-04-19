@@ -24,6 +24,9 @@ class Pages:
 
         # 初始化
         # self.loadPages()
+
+        #当前页码
+        self.currentPage = 1
     
     def loadPages(self, eachPage = 10, allPages = 5 ):
         # 一次载入多个页面放入内存

@@ -20,6 +20,13 @@ def find(name):
 
 @app.route("/submit/tags", methods = ["GET"])
 def submitTag():
+    reqDict = request.args.to_dict()
+    picName = reqDict["pic"]
+    picTags = json.loads(reqDict["tags"])
+    
+    comp.subTags(picName, picTags)
+    pages.pages[pages.currentPage][picName].extend(picTags)
+
     res = make_response(json.dumps(request.args.to_dict()["tags"]))
     res.headers["Access-Control-Allow-Origin"] = "*"
     return  res, 201
@@ -36,11 +43,12 @@ def getPics():
     pageNo = int(request.args.to_dict()["pageNo"])
     if pageNo in pages.pages.keys():
         res = make_response(pages.pages[pageNo])
+        pages.currentPage = pageNo
     else:
         pages.loadMore(pageNo)
         
         if pageNo in pages.pages.keys():
- 
+            pages.currentPage = pageNo
             res = make_response(pages.pages[pageNo])
         else:
             # 重定向主页

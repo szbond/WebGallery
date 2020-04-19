@@ -1,6 +1,9 @@
 import React from "react"
 import Pics from "@/components/pics"
-import Pagination from "antd"
+import "@/css/main.css"
+import { Layout } from 'antd';
+
+const { Header, Footer, Sider, Content } = Layout;
 // import Page from "@/components/page"
 export default class App extends React.Component{
     constructor(props){
@@ -11,12 +14,21 @@ export default class App extends React.Component{
     }
     static defalutProps = {}
     render(){
-        return <div>
-            <h1>gallery</h1>
-            <div className = "org">
-                <img src="" alt="org" id = "org"/>
+        return <div className = "application">
+            <div className="view">
+               
+                <div className = "view-img">
+                    <div className="img-cont"><img src="" alt="org" id = "org"/></div>
+                    
+                </div>
+                
             </div>
-            <Pics></Pics>
+            <div className="cont">
+                <Pics></Pics>
+            </div>
+            
+            {/* <img src="" alt="org" id = "org"/> */}
+            {/* <Pics></Pics> */}
             {/* <Pagination total = {5}/> */}
             
         </div>
