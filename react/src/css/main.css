@@ -5,12 +5,25 @@
 
 
 }
+.sider
+{
+    display: flex;
+    flex-direction: row;
+}
+.pageSider
+{
+    
+    margin: auto 0;
+    width: 10%; 
+    height: 100%;
+}
 .cont
 {
-
-    width: 18%;
-    height: 100%;
+    
+    width: 50%;
+    max-height: 800px;
     overflow: scroll;
+    
     
 }
 
@@ -28,6 +41,7 @@
 {
     text-align: center;
     font-weight: 700;
+    word-wrap: break-word;
     padding: 2px;
 }
 .pic
@@ -74,4 +88,32 @@
 {  
     max-height: 100%;
     max-width: 100%;
+}
+
+.img-tags 
+{
+    float: left;
+    width: 10%;
+    height: 100%;
+    
+    
+}
+
+textarea
+{
+    width: 100%;
+    height: 100%;
+    word-wrap: break-word;
+}
+.subTags
+{
+    display: inline;
+}
+input[type=text]
+{
+    border: none;
+}
+.page
+{
+    display: flex;
 }

@@ -12,7 +12,10 @@ pages.cleanPages()
 pages.loadPages(10,5)
 @app.route("/")
 def index():
-    return render_template("index.html", pics = pics)
+    res = make_response(str(max(pages.pages.keys())) )
+    res.headers["Access-Control-Allow-Origin"] = "*"
+    return res
+    # return render_template("index.html", pics = pics)
 @app.route("/images/<name>")
 def find(name):
     org = comp.database.findOrg(name)
@@ -23,9 +26,11 @@ def submitTag():
     reqDict = request.args.to_dict()
     picName = reqDict["pic"]
     picTags = json.loads(reqDict["tags"])
-    
+    totalTags = pages.pages[pages.currentPage][picName]
     comp.subTags(picName, picTags)
-    pages.pages[pages.currentPage][picName].extend(picTags)
+    for tag in picTags:
+        if tag not in totalTags:
+            pages.pages[pages.currentPage][picName].append(tag)
 
     res = make_response(json.dumps(request.args.to_dict()["tags"]))
     res.headers["Access-Control-Allow-Origin"] = "*"
@@ -52,7 +57,7 @@ def getPics():
             res = make_response(pages.pages[pageNo])
         else:
             # 重定向主页
-            res = make_response(pages.pages[1])
+            res = make_response({})
     res.headers["Access-Control-Allow-Origin"] = "*"
     
     return  res
