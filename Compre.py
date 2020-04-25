@@ -17,7 +17,11 @@ class Compre:
         # 三元组
         self.walkList = []
 
+        self.allowedExt = [".jpg", ".png"]
+
         self.thumbPath = os.path.join(os.path.dirname(__file__),"static/images/thumb")
+
+        self.thumbPic = os.listdir(self.thumbPath)
     def addDir(self, picPath):
         picPath = os.path.normpath(picPath)
         # 添加图片目录
@@ -66,12 +70,22 @@ class Compre:
             self.picData = []
 
     def addPicData(self):
+        self.updateThum()
         pic = Pic.Picture()
+        thumb = True
         for walkPath in self.walkList:
             for root, dirs, files in walkPath:
                 for name in files:
-                    pic.changeCont(os.path.join(root, name),thumbPath=self.thumbPath)             
-                    self.picData.append([(pic.orgin, pic.prev), pic.tags])
+                    if name in self.thumbPic:
+                        thumb = False 
+                    else:
+                        thumb = True 
+                    
+                    if os.path.splitext(name)[-1] in self.allowedExt:
+                        print("processing: " + name)
+                        pic.changeCont(os.path.join(root, name),thumb=thumb,thumbPath=self.thumbPath)  
+                        if not pic.Err:           
+                            self.picData.append([(pic.orgin, pic.prev), pic.tags])
         del pic
 
     def readPage(self, limit=10, cleanPage = False):
@@ -115,6 +129,8 @@ class Compre:
                 pic = Pic.Picture()
                 pic.changeCont(org[2], thumbPath=self.thumbPath)
 
+    def updateThum(self):
+        self.thumbPic = os.listdir(self.thumbPath)
 if __name__ == "__main__":  
     comp = Compre()
     print(comp.readPage())

@@ -4,7 +4,7 @@
 
 ### intro
 
-一个简单的基于python-flask ,sqlite3,和react-js 的服务器图片管理展示
+一个简单的基于python-flask ,sqlite3,和react-js前端开发的服务器图片管理展示
 
 a simple web server base on python-flask ,sqlit3 and react-js.
 
@@ -20,7 +20,7 @@ sqlit3 处理压缩后的图片路径与缩略图路径，并依靠3f关系型�
 
 前端由访问react-js进行开发，获取页面数据后，访问静态的缩略图，并更新页面信息，提交请求，查看原图或标签增减
 
-前端美化，正在考虑antd，如果结果文件过大考虑放弃
+前端美化，antd
 
 
 
@@ -33,10 +33,7 @@ sqlit3 处理压缩后的图片路径与缩略图路径，并依靠3f关系型�
 目前：
 
 flask端，基本路由，压缩，展示标签，原图读取，标签同步
-react端，基本数据的传输，资源的申请，标签的更改与提交，动态页码
-
-
-![screenshots](https://github.com/szbond/WebGallery/tree/master/screenshots/Snipaste_2020-04-19_01-41-49.png)
+react端，基本数据的传输，资源的申请，标签的更改与提交，动态页码(下一步，设置缓存上限)
 
 之后：
 

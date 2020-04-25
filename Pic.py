@@ -1,5 +1,7 @@
-from PIL import Image
+from PIL import Image, ImageFile
 import os
+
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 fileDir = os.path.dirname(os.path.abspath(__file__))
 class Picture:
     def __init__(self):
@@ -8,6 +10,7 @@ class Picture:
         self.prev = ""
         self.tags = []
         self.image = Image.new("RGB",(200, 200))
+        self.Err = False
 
     def thumPic(self):
         if os.path.exists(self.orgin):
@@ -18,19 +21,29 @@ class Picture:
                 rot = 256 / w
                 new_h = h * rot
                 new_w = w * rot
-            self.image.thumbnail((new_w,new_h))
-            self.image.save(self.prev, "jpeg")
+            try:
+                self.image.thumbnail((new_w,new_h))
+                self.image.save(self.prev, "jpeg")
+            except Exception as e:
+                print(e)
+                print(self.orgin)
+                self.Err = True
         else:
             print("file not exists")
 
     def changeCont(self, orgPath ,thumb = True, thumbPath = fileDir):
         self.orgin = os.path.normpath(orgPath)
         self.name = os.path.basename(orgPath)
-        self.prev = os.path.join(thumbPath,self.name)
-        self.image = Image.open(self.orgin)
+        self.prev = os.path.normpath(os.path.join(thumbPath,self.name)) 
+        try:
+            self.image = Image.open(self.orgin)
+        except Exception as e:
+            print(e)
+            print(orgPath)
+            self.Err = True
         if self.image.mode == "P":
             self.image = self.image.convert("RGB")
-        if thumb:
+        if thumb and not self.Err:
             self.thumPic()
 
 
